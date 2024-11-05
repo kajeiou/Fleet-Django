@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Liste des Véhicules</h1>
+<a href="{% url 'add_vehicle' %}">Ajouter un vehicule</a>
+<table border="1">
+    <tr>
+        <th>Immatriculation</th>
+        <th>Marque</th>
+        <th>Modèle</th>
+        <th>Année</th>
+        <th>Détails</th>
+    </tr>
+    {% for vehicle in vehicles %}
+    <tr>
+        <td>{{ vehicle.license_plate }}</td>
+        <td>{{ vehicle.make }}</td>
+        <td>{{ vehicle.model }}</td>
+        <td>{{ vehicle.year }}</td>
+        <td><a href="{% url 'vehicle_detail' vehicle.id %}">Voir Détails</a></td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="6">Aucun véhicule trouvé.</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
